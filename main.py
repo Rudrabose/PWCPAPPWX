@@ -1,3 +1,20 @@
+from flask import Flask
+import threading
+
+app = Flask(__name__)
+
+@app.route('/')
+def health_check():
+    return "Bot is alive!", 200
+
+def run_web():
+    app.run(host="0.0.0.0", port=8000)
+
+# Start the dummy server in a background thread
+threading.Thread(target=run_web).start()
+
+# --- Your Telegram Bot Code Starts Here ---
+
 import requests
 import asyncio
 import aiohttp
